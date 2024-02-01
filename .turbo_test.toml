@@ -14,9 +14,9 @@
 # requiring user input will hang until the check run is cancelled or after a
 # 15 minute timeout.
 [env]
-NEEDRESTART_MODE=a
-DEBIAN_FRONTEND=noninteractive
-CI=true
+NEEDRESTART_MODE="a"
+DEBIAN_FRONTEND="noninteractive"
+CI="true"
 
 [setup]
 packages = """
