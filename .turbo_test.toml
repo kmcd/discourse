@@ -36,7 +36,8 @@ cd /tmp && \
   sudo cp oxipng-8.0.0-x86_64-unknown-linux-musl/oxipng /usr/local/bin && \
   rm oxipng-8.0.0-x86_64-unknown-linux-musl.tar.gz && \
   rm -Rf oxipng-8.0.0-x86_64-unknown-linux-musl
-cd
+  
+cd /src
 
 # Databases
 sudo DEBIAN_FRONTEND=noninteractive apt install --no-install-recommends -yq \
