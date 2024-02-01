@@ -19,7 +19,7 @@ DEBIAN_FRONTEND="noninteractive"
 CI="true"
 
 [setup]
-packages = """
+packages = '''
 sudo apt update -y
 
 # Operating system dependencies
@@ -72,7 +72,7 @@ gem update --system --no-doc
 # Rails
 bundle install --jobs 4 --retry 5
 RAILS_ENV=test rails db:create db:migrate
-"""
+'''
 
 # The setup definition specifies commands to execute before running your test
 # suites.
@@ -82,10 +82,10 @@ RAILS_ENV=test rails db:create db:migrate
 #
 # Unlike the install definition, setup is not cached and therefore executes on
 # every build.
-test_suite = """
+test_suite = '''
 bundle install --deployment --jobs 4 --retry 5
 RAILS_ENV=test rails db:migrate
-"""
+'''
 
 # Test suites are inferred from each TOML key ending with test_suite.
 #
