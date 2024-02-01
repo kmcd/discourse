@@ -269,3 +269,4 @@ gem "net-http"
 gem "cgi", ">= 0.3.6", require: false
 
 gem "tzinfo-data"
+gem "spring-commands-rspec", "~> 1.0", :group => :development, :require => false
