@@ -31,22 +31,19 @@ sudo DEBIAN_FRONTEND=noninteractive apt install --no-install-recommends -yq \
   libssl-dev zlib1g-dev libsnappy-dev libyaml-dev
 
 # Install oxipng
-cd /tmp && \
-  wget https://github.com/shssoichiro/oxipng/releases/download/v8.0.0/oxipng-8.0.0-x86_64-unknown-linux-musl.tar.gz && \
-  tar -xzvf oxipng-8.0.0-x86_64-unknown-linux-musl.tar.gz && \
-  sudo cp oxipng-8.0.0-x86_64-unknown-linux-musl/oxipng /usr/local/bin && \
-  rm oxipng-8.0.0-x86_64-unknown-linux-musl.tar.gz && \
-  rm -Rf oxipng-8.0.0-x86_64-unknown-linux-musl
-
-cd /src
+wget https://github.com/shssoichiro/oxipng/releases/download/v8.0.0/oxipng-8.0.0-x86_64-unknown-linux-musl.tar.gz && \
+tar -xzvf oxipng-8.0.0-x86_64-unknown-linux-musl.tar.gz && \
+sudo cp oxipng-8.0.0-x86_64-unknown-linux-musl/oxipng /usr/local/bin && \
+rm oxipng-8.0.0-x86_64-unknown-linux-musl.tar.gz && \
+rm -Rf oxipng-8.0.0-x86_64-unknown-linux-musl
 
 # Databases
 sudo DEBIAN_FRONTEND=noninteractive apt install --no-install-recommends -yq \
   postgresql postgresql-server-dev-all postgresql-contrib libpq-dev \
-  libsqlite3-dev sqlite3 \
+  libsqlite3-dev sqlite3
 
 curl -fsSL https://packages.redis.io/gpg | sudo gpg --dearmor -o /usr/share/keyrings/redis-archive-keyring.gpg
-echo "deb [signed-by=/usr/share/keyrings/redis-archive-keyring.gpg] https://packages.redis.io/deb $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/redis.list
+echo "deb [signed-by=/usr/share/keyrings/redis-archive-keyring.gpg] https://packages.redis.io/deb $(lsb_release -cs) main" | sudo tee -a /etc/apt/sources.list.d/redis.list
 sudo apt-get update -y
 sudo apt-get install redis -y
 
@@ -75,7 +72,7 @@ gem update --system --no-doc
 bundle install --jobs 4 --retry 5
 createdb discourse_test
 createdb discourse_test_multisite
-RAILS_ENV=test rails db:migrate
+RAILS_ENV=test bundle exec rails db:migrate
 '''
 
 # The setup definition specifies commands to execute before running your test
@@ -88,7 +85,7 @@ RAILS_ENV=test rails db:migrate
 # every build.
 test_suite = '''
 bundle install --deployment --jobs 4 --retry 5
-RAILS_ENV=test rails db:migrate
+RAILS_ENV=test bundle exec rails db:migrate
 '''
 
 # Test suites are inferred from each TOML key ending with test_suite.
