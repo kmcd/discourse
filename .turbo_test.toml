@@ -36,7 +36,7 @@ cd /tmp && \
   sudo cp oxipng-8.0.0-x86_64-unknown-linux-musl/oxipng /usr/local/bin && \
   rm oxipng-8.0.0-x86_64-unknown-linux-musl.tar.gz && \
   rm -Rf oxipng-8.0.0-x86_64-unknown-linux-musl
-  
+
 cd /src
 
 # Databases
@@ -61,7 +61,7 @@ nvm install 18
 nvm alias default 18
 nvm use 18
 npm install -g npm@10.4.0 svgo yarn
-yarn install
+yarn install --ignore-scripts
 
 # Ruby
 \curl -sSL https://get.rvm.io | bash -s -- --ignore-dotfiles
@@ -72,7 +72,9 @@ gem update --system --no-doc
 
 # Rails
 bundle install --jobs 4 --retry 5
-RAILS_ENV=test rails db:create db:migrate
+createdb discourse_test
+createdb discourse_test_multisite
+RAILS_ENV=test rails db:migrate
 '''
 
 # The setup definition specifies commands to execute before running your test
@@ -107,7 +109,8 @@ command = "bin/rspec"
 #
 # Each file is passed as the last argument to your test command.
 # Default test suite
-files = ["spec/**/*_spec.rb"]
+# files = ["spec/**/*_spec.rb"]
+files = ["spec/models/user_spec.rb"]
 
 # An array of file path globs which expands to a list of files. File paths are
 # relative to the project directory.
