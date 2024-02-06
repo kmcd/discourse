@@ -20,6 +20,7 @@ CI="true"
 
 [setup]
 packages = '''
+# clear-cache: da27c644-bc2e-4e14-acd4-fa7f7a002084
 sudo apt update -y
 
 # Operating system dependencies
